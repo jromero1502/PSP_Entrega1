@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "proyectopsp-feb1e": {
+      "hosting": {
+        "Proyecto_PSP": [
+          "proyectopsp-feb1e"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "proyectopsp-feb1e"
+  }
+}
