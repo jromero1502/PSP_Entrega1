@@ -1,4 +1,5 @@
-# ProyectoPSP
+# Proyecto_PSP
+Repo donde se alojará el código desarrollado para el proyecto final de la materia proceso de software personal.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.2.
 
