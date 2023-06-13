@@ -1,15 +1,13 @@
 <section>
-    <h1>Componente de login</h1>
-    <fieldset>
-        <legend>TO-DO List:</legend>
-        <ul>
-            <li>
-                Incluir metodo de iniciar sesion mediante OAuth google Firebase
-            </li>
-            <li>
-                Estilizar componente
-            </li>
-        </ul>
-        <button (click)="login()">Next</button>
-    </fieldset>
+    <div class="login-card">
+        <h1 class="login-card-title">Login</h1>
+        <p class="login-card-description">Elige uno de los siguientes métodos para iniciar sesión:</p>
+        <div class="login-card-options">
+            <div *ngFor="let option of loginOptions" class="login-button" (click)="option.onClick ? option.onClick($event): null">
+                <p [ngStyle]="{
+                    '--option-icon': option.url | loginOptionUrl
+                }">{{option.text}}</p>
+            </div>
+        </div>
+    </div>
 </section>
