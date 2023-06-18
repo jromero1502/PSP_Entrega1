@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class TasksDashboardComponent {
 
+  tasksBoards = [
+    'Backlog',
+    'Ready to do',
+    'In Progress',
+    'Done'
+  ]  
+
 }

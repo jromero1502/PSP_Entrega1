@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import APPLICATION_CONSTANTS from 'src/app/shared/constants/constants';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { StorageService } from 'src/app/shared/services/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -24,14 +26,15 @@ export class LoginComponent {
   constructor( 
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private storageService: StorageService
   ) {
 
   }
 
   login() {
-    this.authService.loginWithGoogle().subscribe(res => {+
-      console.log(res)
+    this.authService.loginWithGoogle().subscribe(res => {
+      this.storageService.setSession(APPLICATION_CONSTANTS.AUTHENTICATION_STORAGE_KEY, res)
       this.router.navigate(['../home/my-tasks'], {
         relativeTo: this.activatedRoute
       })
