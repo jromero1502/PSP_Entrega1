@@ -1,0 +1,26 @@
+<form [formGroup]="formGroup">
+    <h4 class="form-title">Gestionar tarea</h4>
+    <mat-form-field>
+        <mat-label>Titulo</mat-label>
+        <input matInput formControlName="title" />
+        <mat-error *ngIf="formGroup.get('title')!.hasError('required')">El campo es obligatorio</mat-error>
+        <mat-error *ngIf="formGroup.get('title')!.hasError('maxlength')">El campo supera el máximo de caracteres</mat-error>
+        <mat-error *ngIf="formGroup.get('title')!.hasError('minlength')">El campo es muy corto</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Descripcion</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+        <mat-error *ngIf="formGroup.get('description')!.hasError('required')">El campo es obligatorio</mat-error>
+        <mat-error *ngIf="formGroup.get('description')!.hasError('maxlength')">El campo supera el máximo de caracteres</mat-error>
+        <mat-error *ngIf="formGroup.get('description')!.hasError('minlength')">El campo es muy corto</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="state">
+            <mat-option>Seleccione una opcion</mat-option>
+            <mat-option *ngFor="let option of validStates" [value]="option.id">{{option.value}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="formGroup.get('state')!.hasError('required')">El campo es obligatorio</mat-error>
+    </mat-form-field>
+    <button mat-flat-button color="primary" [disabled]="formGroup.invalid" (click)="onClickAction()">Guardar</button>
+</form>

@@ -3,6 +3,8 @@
         '--board-columns': tasksBoards.length
     }">
     <app-task-list 
-        *ngFor="let board of tasksBoards"
-        [listTitle]="board"></app-task-list>
+        *ngFor="let item of tasksBoards"
+        [listTitle]="item.board"
+        [tasks]="item.tasks"
+        ></app-task-list>
 </section>

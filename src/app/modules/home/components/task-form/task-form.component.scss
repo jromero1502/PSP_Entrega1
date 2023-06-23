@@ -1,0 +1,19 @@
+:host {
+    display: block;
+    margin: 10px 15px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & > * {
+        width: 100%;
+    }
+}
+
+.form-title {
+    margin: 15px 0;
+}

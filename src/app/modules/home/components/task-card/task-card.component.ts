@@ -11,16 +11,4 @@ export class TaskCardComponent {
   @Input()
   task!: TaskModel
 
-  state = 'new'
-
-  get newStateLabel() {
-    return TaskCardComponent.NEW_STATE
-  }
-
-  get editStateLabel() {
-    return TaskCardComponent.EDIT_STATE
-  }
-
-  public static readonly NEW_STATE = 'new'
-  public static readonly EDIT_STATE = 'edit'
 }
