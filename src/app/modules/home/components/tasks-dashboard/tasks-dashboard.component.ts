@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import APPLICATION_CONSTANTS from 'src/app/shared/constants/constants';
 import { TaskModel } from 'src/app/shared/models/tasks/tasks.model';
 import { RepositoryService } from 'src/app/shared/services/repository.service';
+import { StorageService } from 'src/app/shared/services/storage.service';
 
 @Component({
   selector: 'app-tasks-dashboard',
@@ -33,47 +35,48 @@ export class TasksDashboardComponent implements OnInit {
   ]  
 
   constructor(
-    private repository: RepositoryService
-  ) {
-
-  }
+    private repository: RepositoryService,
+    private storage: StorageService
+  ) {}
 
   ngOnInit(): void {
     this.getTasks()
   }
 
   getTasks() {
-    this.repository.getByEmail('').subscribe(data => {
+    const userData = this.storage.getSession(APPLICATION_CONSTANTS.AUTHENTICATION_STORAGE_KEY)
+    this.repository.getByEmail(userData?.user.email).subscribe(data => {
+      this.tasksBoards = [
+        {
+          board: 'Backlog',
+          id: 'backlog',
+          tasks: []
+        },
+        {
+          board: 'To Do',
+          id: 'to-do',
+          tasks: []
+        },
+        {
+          board: 'In Progress',
+          id: 'in-progress',
+          tasks: []
+        },
+        {
+          board: 'Done',
+          id: 'done',
+          tasks: []
+        }
+      ] 
       data.forEach(task => {
-        this.tasksBoards = [
-          {
-            board: 'Backlog',
-            id: 'backlog',
-            tasks: []
-          },
-          {
-            board: 'To Do',
-            id: 'to-do',
-            tasks: []
-          },
-          {
-            board: 'In Progress',
-            id: 'in-progress',
-            tasks: []
-          },
-          {
-            board: 'Done',
-            id: 'done',
-            tasks: []
-          }
-        ]  
         this.tasksBoards.filter(board => board.id === task['state'])[0]?.tasks.push({
           createdBy: task['createdBy'],
-          createdDate: task['createdDate'],
+          createdDate: new Date(task['createdDate']?.seconds * 1000),
           description: task['description'],
-          modifiedDate: task['modifiedDate'],
+          modifiedDate: new Date(task['modifiedDate']?.seconds * 1000),
           state: task['state'],
-          title: task['title']
+          title: task['title'],
+          id: task['id']
         })
       })
     })

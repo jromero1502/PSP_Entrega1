@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CollectionReference, DocumentData, Firestore, collectionData } from '@angular/fire/firestore';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { TaskModel } from '../models/tasks/tasks.model';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { from } from 'rxjs';
@@ -21,7 +21,11 @@ export class RepositoryService {
   }
 
   saveTask(task: TaskModel) {
-    return addDoc(this.tasksCollection, task)
+    if (task.id) {
+      return setDoc(doc(this.firestore, this.collectionName, task.id), task)
+    } else {
+      return addDoc(this.tasksCollection, task)
+    }
   }
 
   getByEmail(email: string) {

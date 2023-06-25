@@ -52,6 +52,11 @@ export class TaskFormComponent {
       modifiedDate: new Date(),
       state: ''
     }
+    this.mapDataToFormGroup(this.task)
+  }
+
+  private mapDataToFormGroup(task: TaskModel) {
+    this.formGroup.reset(task)
   }
 
   private buildFormGroup(): FormGroup {
