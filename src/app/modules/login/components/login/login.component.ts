@@ -16,10 +16,6 @@ export class LoginComponent {
       url: 'assets/img/google-icon.svg',
       text: 'Inicia sesión con google',
       onClick: this.login.bind(this)
-    },
-    {
-      url: 'assets/img/facebook-icon.svg',
-      text: 'Inicia sesión con facebook'
     }
   ]
 

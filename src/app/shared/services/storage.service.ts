@@ -20,4 +20,8 @@ export class StorageService {
     let sessionStorageItem = this.sessionStorage.getItem(key)
     return JSON.parse(atob(sessionStorageItem ?? ''))
   }
+  
+  clearStorage() {
+    this.sessionStorage.clear()
+  }
 }

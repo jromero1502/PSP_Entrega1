@@ -9,8 +9,16 @@ section {
     grid-template-rows: minmax(100px, auto);
     gap: 15px 20px;
     background-color: #e3e3e3;
-    height: 80%;
+    height: 100vh;
     margin: 55px 20px;
     padding: 25px;
     border-radius: 5px;
+}
+
+@media(max-width: 750px) {
+    section {
+        display: block;
+        height: unset;
+        margin: 55px 0px;
+    }
 }

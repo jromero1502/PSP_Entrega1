@@ -71,3 +71,13 @@ section {
         }
     }
 }
+
+@media(max-width: 750px) {
+    .login-button {
+        width: 100% !important;
+
+        p {
+            font-size: 0.7rem;
+        }
+    }
+}

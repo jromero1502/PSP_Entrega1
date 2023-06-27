@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import APPLICATION_CONSTANTS from 'src/app/shared/constants/constants';
 import { TaskModel } from 'src/app/shared/models/tasks/tasks.model';
+import { AppStateService } from 'src/app/shared/services/app-state.service';
 import { RepositoryService } from 'src/app/shared/services/repository.service';
 import { StorageService } from 'src/app/shared/services/storage.service';
 
@@ -9,7 +10,7 @@ import { StorageService } from 'src/app/shared/services/storage.service';
   templateUrl: './tasks-dashboard.component.html',
   styleUrls: ['./tasks-dashboard.component.scss']
 })
-export class TasksDashboardComponent implements OnInit {
+export class TasksDashboardComponent implements OnInit, OnDestroy {
 
   tasksBoards: TaskBoardModel[] = [
     {
@@ -36,10 +37,12 @@ export class TasksDashboardComponent implements OnInit {
 
   constructor(
     private repository: RepositoryService,
-    private storage: StorageService
+    private storage: StorageService,
+    private appState: AppStateService
   ) {}
 
   ngOnInit(): void {
+    this.appState.setShowHeader = true
     this.getTasks()
   }
 
@@ -82,6 +85,9 @@ export class TasksDashboardComponent implements OnInit {
     })
   }
 
+  ngOnDestroy(): void {
+    this.appState.setShowHeader = false
+  }
 }
 
 export interface TaskBoardModel {

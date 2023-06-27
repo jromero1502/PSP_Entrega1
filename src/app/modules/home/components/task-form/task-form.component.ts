@@ -36,6 +36,16 @@ export class TaskFormComponent {
 
   task: TaskModel
 
+  get mappedTask() {
+    return {
+      ...this.task,
+      title: this.formGroup.get('title')?.value,
+      description: this.formGroup.get('description')?.value,
+      state: this.formGroup.get('state')?.value,
+      modifiedDate: new Date(),
+    }
+  }
+
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<TaskFormComponent>,
@@ -83,14 +93,19 @@ export class TaskFormComponent {
   }
 
   onClickAction() {
-    this.taskData = {
-      ...this.task,
-      title: this.formGroup.get('title')?.value,
-      description: this.formGroup.get('description')?.value,
-      state: this.formGroup.get('state')?.value,
-      modifiedDate: new Date(),
-    }
-    this.repository.saveTask(this.taskData)
+    this.repository.saveTask(this.mappedTask)
+      .then(res => {
+        console.log(res)
+        this.dialogRef.close()
+      })
+      .catch(err => {
+        console.log(err)
+        this.dialogRef.close()
+      })
+  }
+
+  deleteItem() {
+    this.repository.deleteTask(this.mappedTask)
       .then(res => {
         console.log(res)
         this.dialogRef.close()

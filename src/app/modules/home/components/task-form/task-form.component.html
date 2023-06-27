@@ -23,4 +23,5 @@
         <mat-error *ngIf="formGroup.get('state')!.hasError('required')">El campo es obligatorio</mat-error>
     </mat-form-field>
     <button mat-flat-button color="primary" [disabled]="formGroup.invalid" (click)="onClickAction()">Guardar</button>
+    <button mat-flat-button *ngIf="task.id" color="warn" (click)="deleteItem()">Eliminar</button>
 </form>

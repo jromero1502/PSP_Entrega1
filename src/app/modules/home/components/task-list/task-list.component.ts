@@ -21,13 +21,15 @@ export class TaskListComponent {
   @Input()
   listId = ''
 
-  defaultTask = {
-    title: '',
-    createdBy: this.storage.getSession(APPLICATION_CONSTANTS.AUTHENTICATION_STORAGE_KEY)?.user.email ?? '',
-    createdDate: new Date(),
-    description: '',
-    modifiedDate: new Date(),
-    state: this.listId ?? ''
+  get defaultTask() {
+    return {
+      title: '',
+      createdBy: this.storage.getSession(APPLICATION_CONSTANTS.AUTHENTICATION_STORAGE_KEY)?.user.email ?? '',
+      createdDate: new Date(),
+      description: '',
+      modifiedDate: new Date(),
+      state: this.listId ?? ''
+    }
   }
 
   constructor(
@@ -37,7 +39,7 @@ export class TaskListComponent {
 
   openAddForm(task: TaskModel) {
     const ref = this.dialog.open(TaskFormComponent, {
-      width: '45%',
+      panelClass: 'form-modal',
       data: task
     })
 
